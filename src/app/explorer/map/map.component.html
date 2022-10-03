@@ -1,0 +1,17 @@
+<div class="container">
+  <google-map
+    width="100%"
+    [options]="mapOptions"
+    (mapClick)="moveMap($event)"
+    (mapMousemove)="move($event)"
+    (mapClick)="addMarker($event)"
+  >
+    <map-marker
+      #marker="mapMarker"
+      *ngFor="let layby of laybys"
+      [position]="layby.position"
+      (mapClick)="openInfoWindow(marker)"
+    ></map-marker>
+    <map-info-window>Info Window content</map-info-window>
+  </google-map>
+</div>

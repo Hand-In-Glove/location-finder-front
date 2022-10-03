@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --sand: #efce5e;
+  --oranj: #f4a261;
+  --tan: #e76f51;
+  --surf: #2a9d8f;
+  --blu: #264653;
+}
+
+body {
+  background: radial-gradient(var(--oranj), var(--sand));
+}
