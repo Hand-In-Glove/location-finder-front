@@ -1,1 +1,5 @@
-<p>layby-info works!</p>
+<h1>Layby Information</h1>
+<h3><span class="label">Name</span>: {{ layby.name }}</h3>
+<h3><span class="label">Submitted By:</span> {{ layby.submittedBy }}</h3>
+<h3><span class="label">Rating:</span> {{ layby.rating }}/10</h3>
+<img *ngIf="layby.imageUrl" [src]="layby.imageUrl" alt="{{" layby.name }} />

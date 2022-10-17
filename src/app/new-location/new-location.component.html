@@ -1,0 +1,11 @@
+<div class="container">
+  <form #newLocationForm="ngForm" (ngSubmit)="onSubmit(newLocationForm)">
+    <button
+      class="btn btn-primary"
+      type="submit"
+      [disabled]="!newLocationForm.valid"
+    >
+      Submit
+    </button>
+  </form>
+</div>

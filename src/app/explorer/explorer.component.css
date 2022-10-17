@@ -1,8 +1,4 @@
-.container{
-    max-width: 100vw;
+.container {
+  max-width: 100vw;
+  padding-top: 2rem;
 }
-
-.map-container{
-    width: 95%;
-}
-

@@ -1,24 +1,27 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { User } from '../_models/user.model';
 import { AuthService } from '../_services/auth.service';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css'],
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.css'],
 })
-export class ProfileComponent implements OnInit, OnDestroy {
+export class NavbarComponent implements OnInit, OnDestroy {
+  isLoggedIn = false;
   userSub: Subscription;
+  authSub: Subscription;
+
   constructor(private authService: AuthService) {}
-  user: User;
+
   ngOnInit(): void {
     this.userSub = this.authService.user.subscribe((user) => {
-      this.user = user;
+      this.isLoggedIn = !!user;
     });
   }
 
   ngOnDestroy(): void {
+    this.authSub.unsubscribe();
     this.userSub.unsubscribe();
   }
 }

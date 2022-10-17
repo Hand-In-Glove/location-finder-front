@@ -1,0 +1,21 @@
+.container {
+  min-height: 100vh;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.title > img {
+  height: 3rem;
+  width: 3rem;
+}
+
+.about {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 50vh;
+}

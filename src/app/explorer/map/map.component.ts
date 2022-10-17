@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MapInfoWindow, MapMarker } from '@angular/google-maps';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { MapAnchorPoint, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import Layby from './layby.model';
 
 @Component({
@@ -7,15 +7,15 @@ import Layby from './layby.model';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css'],
 })
-export class MapComponent {
+export class MapComponent implements OnInit {
+  @Input() shouldAddMarker: boolean;
   lat: number = 51.678418;
   lng: number = 7.809007;
-
-  display: google.maps.LatLngLiteral | undefined;
 
   mapOptions: google.maps.MapOptions = {
     center: { lat: this.lat, lng: this.lng },
     zoom: 14,
+    disableDoubleClickZoom: true,
   };
 
   markerOptions: google.maps.MarkerOptions = {
@@ -29,9 +29,12 @@ export class MapComponent {
 
   mockLaybyId = 0;
 
-  laybyToDisplay: number | null = null;
+  laybyToDisplay: Layby | null = null;
 
-  constructor() {
+  showAddConfirmation = false;
+  infoWindowPosition: google.maps.LatLng = null;
+
+  ngOnInit() {
     this.getLocation();
   }
 
@@ -45,11 +48,9 @@ export class MapComponent {
             ...this.mapOptions,
             center: { lat: this.lat, lng: this.lng },
           };
-          console.log('NEW GEOLOCATION : ', this.lat, this.lng);
         },
         (error) => console.log('ERROR: ', error)
       );
-      console.log('NAVIGATOR HAS GEOLOCATION : ', this.lat, this.lng);
     } else {
       console.log('NO GEOLOCATION');
     }
@@ -59,32 +60,34 @@ export class MapComponent {
     this.mapOptions.center = event.latLng?.toJSON();
   }
 
-  move(event: google.maps.MapMouseEvent) {
-    this.display = event.latLng?.toJSON();
-  }
-
   addMarker(event: google.maps.MapMouseEvent) {
     if (event.latLng) {
-      this.laybys.push({
-        position: event.latLng.toJSON(),
-        rating: 10,
-        submittedBy: 'Test User',
-        _id: this.mockLaybyId++,
-      });
+      this.infoWindowPosition = event.latLng;
+      this.showAddConfirmation = true;
+      this.infoWindow.open();
+      // this.infoWindow.open();
+      // this.laybys.push({
+      //   name: 'New Layby',
+      //   position: event.latLng.toJSON(),
+      //   rating: 10,
+      //   submittedBy: 'Test User',
+      //   _id: this.mockLaybyId++,
+      //   imageUrl:
+      //     'https://i2-prod.gloucestershirelive.co.uk/incoming/article688360.ece/ALTERNATES/s1200c/dogging1.jpg',
+      // });
     }
   }
 
   openInfoWindow(marker: MapMarker) {
-    console.log('MARKER POSITION: ', marker.getPosition()?.toJSON());
     this.infoWindow.open(marker);
     const foundLayby = this.getLaybyFromPosition(
       marker.getPosition()?.toJSON()
     );
-    console.log('FOUND THIS ONE: ', foundLayby);
+    if (foundLayby) this.setLaybyToDisplay(foundLayby);
   }
 
-  setLaybyToDisplay(id: Layby['_id']) {
-    this.laybyToDisplay = id;
+  setLaybyToDisplay(layby: Layby) {
+    this.laybyToDisplay = layby;
   }
 
   clearLaybyToDisplay() {

@@ -1,0 +1,26 @@
+<nav class="navbar">
+  <ul class="nav">
+    <div class="header">
+      <li routerLinkActive="active">
+        <a class="nav-link navbar-brand" routerLink="/">
+          <img src="/assets/images/camping.png" alt="/about" />
+        </a>
+      </li>
+    </div>
+    <span *ngIf="isLoggedIn"> | </span>
+    <li routerLinkActive="active" *ngIf="isLoggedIn">
+      <a class="nav-link" routerLink="/explorer"> Explorer </a>
+    </li>
+    <span *ngIf="!isLoggedIn"> | </span>
+    <li routerLinkActive="active" *ngIf="!isLoggedIn">
+      <a class="nav-link" routerLink="/login"> Login </a>
+    </li>
+    <span *ngIf="isLoggedIn"> | </span>
+    <li routerLinkActive="active" *ngIf="isLoggedIn">
+      <a class="nav-link" routerLink="/profile"> Profile </a>
+    </li>
+    <li *ngIf="isLoggedIn">
+      <app-avatar></app-avatar>
+    </li>
+  </ul>
+</nav>

@@ -1,1 +1,17 @@
-<p>profile works!</p>
+<div class="container">
+  <h1>{{ user?.firstName || "" }} {{ user?.lastName || "" }} Profile Page</h1>
+  <section class="details">
+    <h2>Details:</h2>
+    <p>First Name: {{ user?.firstName || "not set" }}</p>
+    <p>Last Name: {{ user?.lastName || "not set" }}</p>
+    <p>Email Address: {{ user?.email || "" }}</p>
+    <button>Edit Details</button>
+  </section>
+  <section class="locations">
+    <h2>Locations</h2>
+    <p>My Locations:</p>
+    <div>...Scrollable list of locations...</div>
+    <p>My Saved Locations:</p>
+    <div>...Scrollable list of locations...</div>
+  </section>
+</div>

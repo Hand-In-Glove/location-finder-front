@@ -1,0 +1,25 @@
+.navbar {
+  background-color: var(--surf);
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+img {
+  height: 30px;
+  width: 30px;
+}
+
+.nav-link {
+  color: whitesmoke;
+  justify-self: flex-end;
+}
+
+.navbar-brand {
+  color: var(--sand);
+  font-weight: 700;
+}

@@ -5,6 +5,7 @@ class Layby {
   submittedBy: string;
   rating: number;
   imageUrl?: string;
+  facilities?: string[];
 }
 
 export default Layby;

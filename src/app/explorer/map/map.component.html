@@ -1,17 +1,25 @@
-<div class="container">
-  <google-map
-    width="100%"
-    [options]="mapOptions"
-    (mapClick)="moveMap($event)"
-    (mapMousemove)="move($event)"
-    (mapClick)="addMarker($event)"
-  >
-    <map-marker
-      #marker="mapMarker"
-      *ngFor="let layby of laybys"
-      [position]="layby.position"
-      (mapClick)="openInfoWindow(marker)"
-    ></map-marker>
-    <map-info-window>Info Window content</map-info-window>
-  </google-map>
-</div>
+<google-map
+  width="100%"
+  height="50vh"
+  [options]="mapOptions"
+  (mapClick)="moveMap($event)"
+  (mapDblclick)="addMarker($event)"
+>
+  <map-marker
+    #marker="mapMarker"
+    *ngFor="let layby of laybys"
+    [position]="layby.position"
+    (mapClick)="openInfoWindow(marker)"
+  ></map-marker>
+  <map-info-window [position]="infoWindowPosition">
+    <app-layby-info
+      *ngIf="laybyToDisplay"
+      [layby]="laybyToDisplay"
+    ></app-layby-info>
+    <app-confirm-add-location
+      *ngIf="showAddConfirmation"
+      [position]="infoWindowPosition"
+    >
+    </app-confirm-add-location>
+  </map-info-window>
+</google-map>
