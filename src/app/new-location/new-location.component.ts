@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import FACILITIES from '../_models/facilities.model';
 
 @Component({
   selector: 'app-new-location',
@@ -11,6 +12,7 @@ import { Subscription } from 'rxjs';
 export class NewLocationComponent implements OnInit {
   position: google.maps.LatLng;
   paramSub: Subscription;
+  facilitiesOptions = Object.values(FACILITIES);
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {

@@ -1,11 +1,36 @@
-<div class="container">
-  <form #newLocationForm="ngForm" (ngSubmit)="onSubmit(newLocationForm)">
-    <button
-      class="btn btn-primary"
-      type="submit"
-      [disabled]="!newLocationForm.valid"
-    >
-      Submit
-    </button>
-  </form>
-</div>
+<main>
+  <div class="container">
+    <form #newLocationForm="ngForm" (ngSubmit)="onSubmit(newLocationForm)">
+      <div class="form-group">
+        <label for="facility">Description:</label>
+        <input
+          type="text"
+          name="description"
+          id="description"
+          class="form-control"
+          ngModel
+        />
+      </div>
+      <section class="facilities-selector">
+        <div class="form-check" *ngFor="let facility of facilitiesOptions">
+          <label for="facility">{{ facility }}</label>
+          <input
+            type="checkbox"
+            name="facility"
+            id="facility"
+            class="form-check-input"
+            [value]="facility"
+            ngModel
+          />
+        </div>
+      </section>
+      <button
+        class="btn btn-primary"
+        type="submit"
+        [disabled]="!newLocationForm.valid"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</main>

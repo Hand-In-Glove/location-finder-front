@@ -10,7 +10,7 @@ import { AboutComponent } from './about/about.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MapComponent } from './explorer/map/map.component';
-import { LaybyInfoComponent } from './explorer/map/layby-info/layby-info.component';
+import { LocationInfoComponent } from './explorer/map/location-info/location-info.component';
 import { ControlsComponent } from './explorer/controls/controls.component';
 import { AuthComponent } from './auth/auth.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
@@ -31,7 +31,7 @@ import { NewLocationComponent } from './new-location/new-location.component';
     ProfileComponent,
     NavbarComponent,
     MapComponent,
-    LaybyInfoComponent,
+    LocationInfoComponent,
     ControlsComponent,
     LoadingSpinnerComponent,
     LoginComponent,

@@ -1,0 +1,9 @@
+<h1>Layby Information</h1>
+<h3><span class="label">Description</span>: {{ location.description }}</h3>
+<h3><span class="label">Submitted By:</span> {{ location.submittedBy }}</h3>
+<h3><span class="label">Facilities:</span> {{ location.facilities }}/10</h3>
+<img
+  *ngIf="location.imageUrl"
+  [src]="location.imageUrl"
+  alt="{{ location.description }}"
+/>

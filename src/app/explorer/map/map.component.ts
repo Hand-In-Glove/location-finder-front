@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MapAnchorPoint, MapInfoWindow, MapMarker } from '@angular/google-maps';
-import Layby from './layby.model';
-
+import { MapInfoWindow, MapMarker } from '@angular/google-maps';
+import { Location } from 'src/app/_models/location.model';
+// TODO: lift location data to explorer component
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -23,13 +23,13 @@ export class MapComponent implements OnInit {
     draggable: false,
   };
 
-  laybys: Layby[] = [];
+  userLocations: Location[] = [];
 
   @ViewChild(MapInfoWindow) infoWindow: MapInfoWindow;
 
   mockLaybyId = 0;
 
-  laybyToDisplay: Layby | null = null;
+  locationToDisplay: Location | null = null;
 
   showAddConfirmation = false;
   infoWindowPosition: google.maps.LatLng = null;
@@ -65,38 +65,28 @@ export class MapComponent implements OnInit {
       this.infoWindowPosition = event.latLng;
       this.showAddConfirmation = true;
       this.infoWindow.open();
-      // this.infoWindow.open();
-      // this.laybys.push({
-      //   name: 'New Layby',
-      //   position: event.latLng.toJSON(),
-      //   rating: 10,
-      //   submittedBy: 'Test User',
-      //   _id: this.mockLaybyId++,
-      //   imageUrl:
-      //     'https://i2-prod.gloucestershirelive.co.uk/incoming/article688360.ece/ALTERNATES/s1200c/dogging1.jpg',
-      // });
     }
   }
 
   openInfoWindow(marker: MapMarker) {
     this.infoWindow.open(marker);
-    const foundLayby = this.getLaybyFromPosition(
+    const foundLocation = this.getLocationFromPosition(
       marker.getPosition()?.toJSON()
     );
-    if (foundLayby) this.setLaybyToDisplay(foundLayby);
+    if (foundLocation) this.setLocationToDisplay(foundLocation);
   }
 
-  setLaybyToDisplay(layby: Layby) {
-    this.laybyToDisplay = layby;
+  setLocationToDisplay(location: Location) {
+    this.locationToDisplay = location;
   }
 
-  clearLaybyToDisplay() {
-    this.laybyToDisplay = null;
+  clearLocationToDisplay() {
+    this.locationToDisplay = null;
   }
 
-  getLaybyFromPosition(position: google.maps.LatLngLiteral | undefined) {
+  getLocationFromPosition(position: google.maps.LatLngLiteral | undefined) {
     if (!position) return undefined;
-    const foundLayby = this.laybys.find((layby) => {
+    const foundLocation = this.userLocations.find((layby) => {
       if (
         layby.position.lat === position.lat &&
         layby.position.lng === position.lng
@@ -106,6 +96,6 @@ export class MapComponent implements OnInit {
       return false;
     });
 
-    return foundLayby;
+    return foundLocation;
   }
 }

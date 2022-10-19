@@ -6,13 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./explorer.component.css'],
 })
 export class ExplorerComponent implements OnInit {
-  shouldAddMarker = false;
-
   constructor() {}
-
-  onSetAddMarker(state: boolean) {
-    this.shouldAddMarker = state;
-  }
 
   ngOnInit(): void {}
 }

@@ -7,15 +7,15 @@
 >
   <map-marker
     #marker="mapMarker"
-    *ngFor="let layby of laybys"
-    [position]="layby.position"
+    *ngFor="let location of userLocations"
+    [position]="location.position"
     (mapClick)="openInfoWindow(marker)"
   ></map-marker>
   <map-info-window [position]="infoWindowPosition">
-    <app-layby-info
-      *ngIf="laybyToDisplay"
-      [layby]="laybyToDisplay"
-    ></app-layby-info>
+    <app-location-info
+      *ngIf="locationToDisplay"
+      [location]="locationToDisplay"
+    ></app-location-info>
     <app-confirm-add-location
       *ngIf="showAddConfirmation"
       [position]="infoWindowPosition"

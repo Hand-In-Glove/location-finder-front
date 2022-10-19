@@ -9,6 +9,7 @@ interface ILocation {
   submittedBy: User;
   facilities: string[];
   recommendedBy: User[];
+  description?: string;
   // rating: number;
   imageUrl: string;
 }
@@ -20,6 +21,7 @@ export class Location implements ILocation {
     public submittedBy: User,
     public facilities: string[],
     public recommendedBy: User[],
-    public imageUrl: string
+    public imageUrl: string,
+    public description = ''
   ) {}
 }
