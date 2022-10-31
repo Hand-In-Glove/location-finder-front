@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -21,6 +21,7 @@ import { AvatarComponent } from './navbar/avatar/avatar.component';
 import { LocationComponent } from './location/location.component';
 import { ConfirmAddLocationComponent } from './explorer/map/confirm-add-location/confirm-add-location.component';
 import { NewLocationComponent } from './new-location/new-location.component';
+import { AuthInterceptorService } from './_services/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,13 @@ import { NewLocationComponent } from './new-location/new-location.component';
     GoogleMapsModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

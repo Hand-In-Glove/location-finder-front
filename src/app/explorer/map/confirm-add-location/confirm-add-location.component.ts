@@ -15,7 +15,7 @@ export class ConfirmAddLocationComponent implements OnInit {
   handleRedirect() {
     console.log('CLICKED TO REDIRECT');
     this.router.navigate(['/new-location'], {
-      queryParams: { position: this.position },
+      queryParams: { position: this.position.toUrlValue() },
     });
   }
 }

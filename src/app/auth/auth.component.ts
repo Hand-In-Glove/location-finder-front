@@ -37,8 +37,8 @@ export class AuthComponent {
 
   onSubmit(form: NgForm) {
     let authObs: Observable<HttpResponse<AuthResponseData>>;
-    this.isLoading = true;
     if (!form.valid) return;
+    this.isLoading = true;
     if (this.mode === 'signup') {
       authObs = this.authService.signup(form.value);
     }

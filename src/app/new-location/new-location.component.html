@@ -1,6 +1,16 @@
 <main>
   <div class="container">
-    <form #newLocationForm="ngForm" (ngSubmit)="onSubmit(newLocationForm)">
+    <div class="loader" *ngIf="isLoading">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+    <div class="alert alert-danger" *ngIf="error">
+      {{ error }}
+    </div>
+    <form
+      #newLocationForm="ngForm"
+      (ngSubmit)="onSubmit(newLocationForm)"
+      *ngIf="!isLoading"
+    >
       <div class="form-group">
         <label for="facility">Description:</label>
         <input
@@ -19,6 +29,7 @@
             name="facility"
             id="facility"
             class="form-check-input"
+            (change)="onCheckChange($event.target)"
             [value]="facility"
             ngModel
           />
